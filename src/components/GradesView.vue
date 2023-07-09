@@ -100,20 +100,17 @@ export default {
       console.log(this.gradesData.grades[0].fullname)
       let filt = this.gradesData.grades
       return function(graad) {
-        console.log(graad);
-        console.log(filt);
-        let filteredGrades = this.gradesData.grades;
         if (this.selectedComponent) {
-          filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
+          filt = filt.filter(grade => grade.component === this.selectedComponent);
         }
         if (this.selectedGraad) {
-          filteredGrades = filteredGrades.filter(grade => grade.graad === this.selectedGraad);
+          filt = filt.filter(grade => grade.graad === this.selectedGraad);
         }
         if (graad) {
-          filteredGrades = filteredGrades.filter(grade => grade.graad === graad);
+          filt = filt.filter(grade => grade.graad === graad);
         }
-        console.log(filteredGrades);
-        return filteredGrades;
+        console.log(filt);
+        return filt;
       };
     },
   },
