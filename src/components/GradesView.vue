@@ -100,17 +100,17 @@ computed: {
     const graad = this.selectedGraad;
     const component = this.selectedComponent;
 
-    return this.gradesData.grades.filter(grade => {
-      if (graad && grade.graad !== graad) {
-        return false;
-      }
-      if (component && grade.component !== component) {
-        return false;
-      }
-      return true;
-    });
+    let filteredGrades = this.gradesData.grades;
+    if (graad) {
+      filteredGrades = filteredGrades.filter(grade => grade.graad === graad);
+    }
+    if (component) {
+      filteredGrades = filteredGrades.filter(grade => grade.component === component);
+    }
+    return filteredGrades;
   },
 },
+
   methods: {
     getComponentClass(grade) {
       return {
