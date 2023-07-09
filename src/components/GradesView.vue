@@ -98,9 +98,10 @@ export default {
   computed: {
     filteredGrades() {
       console.log(this.gradesData.grades[0].fullname)
+      let filt = this.gradesData.grades
       return function(graad) {
-        console.log(graad)
-        console.log(this.gradesData.grades[1].fullname)
+        console.log(graad);
+        console.log(filt);
         let filteredGrades = this.gradesData.grades;
         if (this.selectedComponent) {
           filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
