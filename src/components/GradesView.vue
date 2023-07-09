@@ -97,18 +97,24 @@ export default {
   },
 computed: {
   filteredGrades() {
-    let filteredData = this.gradesData.grades;
+    let filt = this.gradesData.grades;
 
     if (this.selectedComponent) {
-      filteredData = filteredData.filter(grade => grade.component === this.selectedComponent);
+      filt = filt.filter(grade => grade.component === this.selectedComponent);
     }
     if (this.selectedGraad) {
-      filteredData = filteredData.filter(grade => grade.graad === this.selectedGraad);
+      filt = filt.filter(grade => grade.graad === this.selectedGraad);
     }
 
-    return filteredData;
+    return function(graad) {
+      if (graad) {
+        return filt.filter(grade => grade.graad === graad);
+      }
+      return filt;
+    };
   },
 },
+
   methods: {
     getComponentClass(grade) {
       return {
