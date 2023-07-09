@@ -1,5 +1,6 @@
 <template>
   <div class="learning-view">
+    <button class="btn home-btn" @click="home">Home</button> <!-- Move the back to home button outside the card -->
     <div class="card">
       <div v-if="!completed">
         <div class="grade-container" v-if="currentGrade">
@@ -7,7 +8,7 @@
           <div class="question-info">
             <p>Vraag {{ askedGrades.length + 1 }} van de {{ grades.length }}</p>
           </div>
-          <input ref="userInput" v-model="userInput" type="text" placeholder="Voer het cijfer in" @keyup.enter="checkAnswer" />
+          <input ref="userInput" v-model="userInput" type="text" placeholder="Voer de graad in" @keyup.enter="checkAnswer" />
           <button class="btn" @click="checkAnswer">Volgende</button>
         </div>
       </div>
@@ -27,7 +28,6 @@
         </ul>
         <div class="button-container">
           <button class="btn" @click="restart">Speel opnieuw</button>
-          <button class="btn" @click="home">Home</button>
         </div>
       </div>
     </div>
@@ -186,7 +186,7 @@ input[type="text"] {
   }
 
   .btn {
-    width: 100%;
+    width: 150px; /* Adjust the width for smaller size */
   }
 }
 
@@ -202,4 +202,9 @@ h2 {
   word-break: break-word;
 }
 
+.home-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
 </style>
