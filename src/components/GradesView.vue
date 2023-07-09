@@ -110,6 +110,7 @@ export default {
         if (graad) {
           filteredGrades = filteredGrades.filter(grade => grade.graad === graad);
         }
+        console.log(filteredGrades);
         return filteredGrades;
       };
     },
