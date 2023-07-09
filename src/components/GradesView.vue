@@ -90,7 +90,7 @@ import gradesData from '../grades.json';
 export default {
   data() {
     return {
-      gradesData: gradesData,
+      gradesData: {},
       selectedComponent: '',
       selectedGraad: '',
     };
@@ -98,7 +98,7 @@ export default {
   computed: {
     filteredGrades() {
       return function(graad) {
-        let filteredGrades = this.gradesData.grades;
+        let filteredGrades = this.gradesData.grades || [];
         if (this.selectedComponent) {
           filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
         }
@@ -122,6 +122,9 @@ export default {
         'darkblue': grade.component === 'Marinecomponent',
       };
     },
+  },
+  mounted() {
+    this.gradesData = gradesData;
   },
 };
 </script>
