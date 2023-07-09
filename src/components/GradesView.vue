@@ -95,23 +95,22 @@ export default {
       selectedGraad: '',
     };
   },
-  computed: {
-    filteredGrades() {
-      return function(graad) {
-        let filteredGrades = this.gradesData.grades;
-        if (this.selectedComponent) {
-          filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
-        }
-        if (this.selectedGraad) {
-          filteredGrades = filteredGrades.filter(grade => grade.graad === this.selectedGraad);
-        }
-        if (graad) {
-          filteredGrades = filteredGrades.filter(grade => grade.graad === graad);
-        }
-        return filteredGrades;
-      };
-    },
+computed: {
+  filteredGrades() {
+    const graad = this.selectedGraad;
+    const component = this.selectedComponent;
+
+    return this.gradesData.grades.filter(grade => {
+      if (graad && grade.graad !== graad) {
+        return false;
+      }
+      if (component && grade.component !== component) {
+        return false;
+      }
+      return true;
+    });
   },
+},
   methods: {
     getComponentClass(grade) {
       return {
