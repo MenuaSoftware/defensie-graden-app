@@ -26,7 +26,7 @@
               <h4>{{ graad }}</h4>
             </div>
             <div class="grid">
-              <div v-for="grade in filteredGrades" :key="grade.id" class="card">
+              <div v-for="grade in filteredGrades(graad)" :key="grade.id" class="card">
                 <div class="card-content">
                   <div class="image-container">
                     <img :src="grade.image" alt="Grade Image" width="100" />
@@ -63,14 +63,19 @@ export default {
   },
   computed: {
     filteredGrades() {
-      let filteredGrades = this.gradesData;
-      if (this.selectedComponent) {
-        filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
-      }
-      if (this.selectedGraad) {
-        filteredGrades = filteredGrades.filter(grade => grade.graad === this.selectedGraad);
-      }
-      return filteredGrades;
+      return function(graad) {
+        let filteredGrades = this.gradesData;
+        if (this.selectedComponent) {
+          filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
+        }
+        if (this.selectedGraad) {
+          filteredGrades = filteredGrades.filter(grade => grade.graad === this.selectedGraad);
+        }
+        if (graad) {
+          filteredGrades = filteredGrades.filter(grade => grade.graad === graad);
+        }
+        return filteredGrades;
+      };
     },
     graadCategories() {
       return [...new Set(this.gradesData.map(grade => grade.graad))];
