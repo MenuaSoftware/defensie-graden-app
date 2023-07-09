@@ -95,25 +95,20 @@ export default {
       selectedGraad: '',
     };
   },
-  computed: {
-    filteredGrades() {
-      console.log(this.gradesData.grades[0].fullname)
-      let filt = this.gradesData.grades
-      return function(graad) {
-        if (this.selectedComponent) {
-          filt = filt.filter(grade => grade.component === this.selectedComponent);
-        }
-        if (this.selectedGraad) {
-          filt = filt.filter(grade => grade.graad === this.selectedGraad);
-        }
-        if (graad) {
-          filt = filt.filter(grade => grade.graad === graad);
-        }
-        console.log(filt);
-        return filt;
-      };
-    },
+computed: {
+  filteredGrades() {
+    let filteredData = this.gradesData.grades;
+
+    if (this.selectedComponent) {
+      filteredData = filteredData.filter(grade => grade.component === this.selectedComponent);
+    }
+    if (this.selectedGraad) {
+      filteredData = filteredData.filter(grade => grade.graad === this.selectedGraad);
+    }
+
+    return filteredData;
   },
+},
   methods: {
     getComponentClass(grade) {
       return {
