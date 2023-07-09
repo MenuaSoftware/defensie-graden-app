@@ -21,22 +21,56 @@
               <option value="Officieren">Officieren</option>
             </select>
           </div>
-          <div v-for="graad in graadCategories" :key="graad">
-            <div class="divider">
-              <h4>{{ graad }}</h4>
+          <div class="divider">
+            <h4>Vrijwilligers</h4>
+          </div>
+          <div class="grid">
+            <div v-for="grade in filteredGrades('Vrijwilligers')" :key="grade.id" class="card">
+              <div class="card-content">
+                <div class="image-container">
+                  <img :src="grade.image" alt="Grade Image" width="100" />
+                </div>
+                <div class="info-container">
+                  <h3>{{ grade.fullname }}</h3>
+                  <p>{{ grade.abbreviation }}</p>
+                  <p style="color: #ec7a7a">"{{ grade.title }}"</p>
+                  <p :class="getComponentClass(grade)">{{ grade.component }}</p>
+                </div>
+              </div>
             </div>
-            <div class="grid">
-              <div v-for="grade in filteredGrades" :key="grade.id" class="card">
-                <div class="card-content">
-                  <div class="image-container">
-                    <img :src="grade.image" alt="Grade Image" width="100" />
-                  </div>
-                  <div class="info-container">
-                    <h3>{{ grade.fullname }}</h3>
-                    <p>{{ grade.abbreviation }}</p>
-                    <p style="color: #ec7a7a">{{ grade.title }}</p>
-                    <p :class="getComponentClass(grade)">{{ grade.component }}</p>
-                  </div>
+          </div>
+          <div class="divider">
+            <h4>Onderofficieren</h4>
+          </div>
+          <div class="grid">
+            <div v-for="grade in filteredGrades('Onderofficieren')" :key="grade.id" class="card">
+              <div class="card-content">
+                <div class="image-container">
+                  <img :src="grade.image" alt="Grade Image" width="100" />
+                </div>
+                <div class="info-container">
+                  <h3>{{ grade.fullname }}</h3>
+                  <p>{{ grade.abbreviation }}</p>
+                  <p style="color: #ec7a7a">"{{ grade.title }}"</p>
+                  <p :class="getComponentClass(grade)">{{ grade.component }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="divider">
+            <h4>Officieren</h4>
+          </div>
+          <div class="grid">
+            <div v-for="grade in filteredGrades('Officieren')" :key="grade.id" class="card">
+              <div class="card-content">
+                <div class="image-container">
+                  <img :src="grade.image" alt="Grade Image" width="100" />
+                </div>
+                <div class="info-container">
+                  <h3>{{ grade.fullname }}</h3>
+                  <p>{{ grade.abbreviation }}</p>
+                  <p style="color: #ec7a7a">"{{ grade.title }}"</p>
+                  <p :class="getComponentClass(grade)">{{ grade.component }}</p>
                 </div>
               </div>
             </div>
@@ -56,29 +90,28 @@ import gradesData from '../grades.json';
 export default {
   data() {
     return {
-      gradesData: gradesData.grades,
+      gradesData: gradesData,
       selectedComponent: '',
       selectedGraad: '',
     };
   },
-computed: {
-  filteredGrades() {
-    let filteredGrades = this.gradesData;
-    if (this.selectedComponent) {
-      filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
-    }
-    if (this.selectedGraad) {
-      filteredGrades = filteredGrades.filter(grade => grade.graad === this.selectedGraad);
-    }
-    return filteredGrades
-      .filter((grade, index, self) => index === self.findIndex(g => g.id === grade.id)) // Remove duplicates
-      .sort((a, b) => a.fullname.localeCompare(b.fullname)); // Sort by fullname
+  computed: {
+    filteredGrades() {
+      return function(graad) {
+        let filteredGrades = this.gradesData.grades;
+        if (this.selectedComponent) {
+          filteredGrades = filteredGrades.filter(grade => grade.component === this.selectedComponent);
+        }
+        if (this.selectedGraad) {
+          filteredGrades = filteredGrades.filter(grade => grade.graad === this.selectedGraad);
+        }
+        if (graad) {
+          filteredGrades = filteredGrades.filter(grade => grade.graad === graad);
+        }
+        return filteredGrades;
+      };
+    },
   },
-  graadCategories() {
-    return [...new Set(this.gradesData.map(grade => grade.graad))].sort(); // Sort graad categories
-  },
-},
-
   methods: {
     getComponentClass(grade) {
       return {
