@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import gradesData from '../grades.json';
+import gradesData from '@/grades.json';
 
 export default {
   data() {
