@@ -15,7 +15,8 @@
             <p class="light-grey-text">Versterk je kennis, verdedig je carrière!</p>
             <div class="buttons">
               <!-- Buttons -->
-              <button class="btn btn-start" @click="start">Start</button>
+              <button class="btn btn-start" @click="start">Oefenen</button>
+              <button class="btn btn-instellingen" @click="instellingen">Instellingen</button>
               <button class="btn btn-graden" @click="showGrades" >De graden</button>
             </div>
           </div>
@@ -34,10 +35,13 @@
 export default {
   methods: {
     start() {
-      this.$router.push('/learning');
+      this.$router.push('/oefening');
     },
-        showGrades() {
-      this.$router.push('/grades');
+    showGrades() {
+      this.$router.push('/graden');
+    },
+    instellingen() {
+      this.$router.push('/instellingen');
     },
   },
 };

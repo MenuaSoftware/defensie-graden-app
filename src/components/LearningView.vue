@@ -1,6 +1,6 @@
 <template>
   <div class="learning-view">
-    <button class="btn home-btn" @click="home">Home</button> <!-- Move the back to home button outside the card -->
+    <button class="btn home-btn" @click="home">Home</button>
     <div class="card">
       <div v-if="!completed">
         <div class="grade-container" v-if="currentGrade">
@@ -60,6 +60,11 @@ export default {
     maxLength() {
       this.restart();
     },
+    $route(to, ) {
+      if (to.path === '/oefening') {
+        this.maxLength = this.$store.state.questionCount;
+      }
+    },
   },
   methods: {
     selectRandomGrade() {
@@ -75,7 +80,7 @@ export default {
       }
     },
     checkAnswer() {
-      const userAnswer = this.userInput.trim(); // Trim the user's input
+      const userAnswer = this.userInput.trim();
 
       if (userAnswer.toLowerCase() === this.currentGrade.fullname.toLowerCase()) {
         this.score++;
