@@ -31,6 +31,18 @@
 									bezoeken.</a
 								>
 							</div>
+							<button class="btn btn-start" @click="start">
+								Oefenen
+							</button>
+							<button
+								class="btn btn-instellingen"
+								@click="instellingen"
+							>
+								Instellingen
+							</button>
+							<button class="btn btn-graden" @click="showGrades">
+								De graden
+							</button>
 						</div>
 					</div>
 				</div>
